@@ -11,12 +11,27 @@ cache:
 matrix:
   include:
 
+    # Build the playground app (JavaScript only)
     - language: node_js
       node_js:
         - stable
+      install:
+        - cd playground
+        - npm install
+        - # Replace symlinks with real copies to fix issues with the react-native packager
+        - rm node_modules/rock-native-*
+        - cp -r ../packages/rock-native-* node_modules
       script:
-        - ls
+        - mkdir -p build/android-dev
+        - mkdir -p build/android-release
+        - mkdir -p build/ios-dev
+        - mkdir -p build/ios-release
+        - node node_modules/react-native/local-cli/cli.js bundle --platform android --dev true --reset-cache --entry-file index.js --bundle-output build/android-dev/index.android.bundle --assets-dest build/android-dev
+        - node node_modules/react-native/local-cli/cli.js bundle --platform android --dev false --reset-cache --entry-file index.js --bundle-output build/android-release/index.android.bundle --assets-dest build/android-release
+        - node node_modules/react-native/local-cli/cli.js bundle --platform ios --dev true --reset-cache --entry-file index.js --bundle-output build/ios-dev/index.ios.bundle --assets-dest build/ios-dev
+        - node node_modules/react-native/local-cli/cli.js bundle --platform ios --dev false --reset-cache --entry-file index.js --bundle-output build/ios-release/index.ios.bundle --assets-dest build/ios-release
 
+    # Build the Android playground app
     - language: android
       jdk: oraclejdk8
       android:
@@ -27,11 +42,15 @@ matrix:
         - cd playground
         - nvm install node
         - npm install
+        - # Replace symlinks with real copies to fix issues with the react-native packager
+        - rm node_modules/rock-native-*
+        - cp -r ../packages/rock-native-* node_modules
       script:
         - cd android
         - ./gradlew --info --stacktrace assembleRelease
         - cd -
 
+    # Build the iOS playground app
     - language: objective-c
       osx_image: xcode9.3
       xcode_project: ios/Playground.xcodeproj
