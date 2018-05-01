@@ -1,0 +1,44 @@
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.nvm
+    - $HOME/.npm
+    - $HOME/.cocoapods
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+matrix:
+  include:
+
+    - language: node_js
+      node_js:
+        - stable
+      script:
+        - ls
+
+    - language: android
+      jdk: oraclejdk8
+      android:
+        components:
+          - build-tools-23.0.1
+          - android-23
+      install:
+        - cd examples
+        - nvm install node
+        - npm install
+      script:
+        - cd examples/android
+        - ./gradlew --info --stacktrace assembleRelease
+        - cd -
+
+    - language: objective-c
+      osx_image: xcode9.3
+      xcode_project: ios/Example.xcodeproj
+      xcode_scheme: Example
+      install:
+        - cd examples
+        - npm install
+      script:
+        - cd examples
+        - xcodebuild clean build -sdk iphonesimulator -project "$TRAVIS_XCODE_PROJECT" -scheme "$TRAVIS_XCODE_SCHEME"
