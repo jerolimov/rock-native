@@ -24,7 +24,7 @@ matrix:
           - build-tools-23.0.1
           - android-23
       install:
-        - cd examples
+        - cd playground
         - nvm install node
         - npm install
       script:
@@ -34,10 +34,10 @@ matrix:
 
     - language: objective-c
       osx_image: xcode9.3
-      xcode_project: ios/Example.xcodeproj
-      xcode_scheme: Example
+      xcode_project: ios/Playground.xcodeproj
+      xcode_scheme: Playground
       install:
-        - cd examples
+        - cd playground
         - npm install
       script:
         - xcodebuild clean build -sdk iphonesimulator -project "$TRAVIS_XCODE_PROJECT" -scheme "$TRAVIS_XCODE_SCHEME"

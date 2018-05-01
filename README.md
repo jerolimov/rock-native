@@ -2,22 +2,24 @@
 
 [![Build Status](https://travis-ci.org/rocknative/rocknative.svg?branch=master)](https://travis-ci.org/rocknative/rocknative)
 
-## Work with the example project
+## Work with the playground / examples
 
-To open the Android project:
+Each package contains multiple examples which are included in the playground app.
+
+To open the playground app on Android:
 
 ```
-cd examples
+cd playground
 yarn install
 yarn android
 ```
 
-To open the iOS project:
+To open the playground app on iOS:
 
 ```
-cd examples
+cd playground
 yarn install
-yarn ios # or open ios/Example.xcodeproj
+yarn ios # or open ios/Playground.xcodeproj
 ```
 
 ## License
