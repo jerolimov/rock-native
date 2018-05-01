@@ -1,0 +1,15 @@
+{
+  "name": "rock-native-webview",
+  "version": "0.1.0",
+  "description": "Rock Native WebView",
+  "main": "src/index.js",
+  "keywords": [
+    "react-native"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": "^0.41.2",
+    "react-native-windows": "0.41.0-rc.1"
+  }
+}
