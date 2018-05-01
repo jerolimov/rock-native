@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import BasicExample from '../packages/rock-native-forms/examples/BasicExample';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import BasicExample from 'rock-native-forms/examples/BasicExample';
 
 const styles = StyleSheet.create({
   container: {
